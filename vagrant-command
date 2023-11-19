@@ -1,0 +1,7 @@
+#!/bin/bash
+
+mkdir lab-9
+
+cd ./lab-9
+
+vagrant init -m ubuntu/xenial64

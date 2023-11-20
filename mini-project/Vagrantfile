@@ -1,0 +1,19 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+IP_ADDR = "192.168.56.10"
+BOX_CPU_COUNT = 1
+BOX_RAM_MB = 1024
+
+Vagrant.configure("2") do |config|
+  config.vm.box = "ubuntu/bionic64"
+  config.vm.network "private_network", ip: IP_ADDR
+  config.vm.synced_folder "multi-01-starting-setup", "/app/"
+  config.vm.provision "docker"
+  config.vm.provision :docker_compose
+  config.vm.provision "shell", path: "script.sh"
+  config.vm.provider "virtual_box" do |v|
+    v.cpus = BOX_CPU_COUNT
+    v.memory = BOX_RAM_MB
+  end
+end
